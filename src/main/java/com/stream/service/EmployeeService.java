@@ -65,4 +65,35 @@ public class EmployeeService {
                 .findFirst()
                 .get();
     }
+
+
+    public Employee findEmployeeWithMinimumSalary() throws Exception {
+
+        return getAllEmployees()
+                .stream()
+                .min(Comparator.comparingInt(Employee::getSalary))
+                .orElseThrow(() -> new Exception());
+
+    }
+
+
+    public List<Employee> workingOnMoreThanOneProject() {
+
+        return getAllEmployees().stream()
+                .filter(employee -> employee.getProjects().size() > 1)
+                .collect(Collectors.toList());
+
+    }
+
+
+    public Long listOfProjectWorkingWithPM(){
+
+       return getAllEmployees()
+                .stream()
+                .flatMap(pm->pm.getProjects().stream())
+                .filter(project -> "Robert Downey Jr".equalsIgnoreCase(project.getProjectManager()))
+                .count();
+
+    }
+
 }

@@ -41,13 +41,33 @@ public class EmployeeController {
     }
 
     @GetMapping("/shortByFirstName")
-    public List<Employee> sortedEmployeesByFirstName(){
-        return  employeeService.shortEmployeeByFirstName();
+    public List<Employee> sortedEmployeesByFirstName() {
+        return employeeService.shortEmployeeByFirstName();
     }
 
     @GetMapping("/thirdHighestSalary")
-    public Employee findEmployeeWithThirdHighestSalary(){
+    public Employee findEmployeeWithThirdHighestSalary() {
         return employeeService.printEmployeeWithThirdHighestSalary();
+    }
+
+
+    @GetMapping("/minimumSalary")
+    public Employee findEmployeeWithMinimumSalary() {
+        try {
+            return employeeService.findEmployeeWithMinimumSalary();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @GetMapping("/moreThanOneProject")
+    public List<Employee> findEmployeeWorkingOnMoreThanOneProject(){
+        return employeeService.workingOnMoreThanOneProject();
+    }
+
+    @GetMapping("/pm")
+    public Long countOfProjectHavingPm(){
+        return employeeService.listOfProjectWorkingWithPM();
     }
 
 }
