@@ -1,8 +1,10 @@
 package com.stream.misc;
 
+import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class StreamOp<T> {
@@ -11,8 +13,7 @@ public class StreamOp<T> {
     public static void main(String[] args) {
         List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8);
 
-        var summerizeValues = summerizeValues(numbers);
-        System.out.println("summerizeValues = " + summerizeValues);
+        filterValuesUsingPredicate();
     }
 
     /**
@@ -39,14 +40,20 @@ public class StreamOp<T> {
     }
 
     /**
-     *
      * @param list
      * @return IntSummaryStatistics e.g IntSummaryStatistics{count=8, sum=36, min=1, average=4.500000, max=8}
-     *
      */
     public static IntSummaryStatistics summerizeValues(List<Integer> list) {
         return list.stream()
                 .collect(Collectors.summarizingInt(l -> l));
     }
 
+
+    public static void filterValuesUsingPredicate() {
+        List<String> nonEmptyStrings = Arrays
+                .asList("", "a", "b", "")
+                .stream()
+                .filter(Predicate.not(String::isBlank))
+                .toList();
+    }
 }

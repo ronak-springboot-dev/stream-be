@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Scanner;
 
 @RestController
 @RequestMapping("/customers")
@@ -16,17 +17,28 @@ public class CustomerController {
     private CustomerService customerService;
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer){
+    public Customer createCustomer(@RequestBody Customer customer) {
         return customerService.createCustomer(customer);
     }
 
     @GetMapping
-    public List<Customer> findAllCustomer(){
+    public List<Customer> findAllCustomer() {
         return customerService.getAllCustomer();
     }
 
     @GetMapping("{/id}")
-    public Customer findCustomerById(@PathVariable Long id){
+    public Customer findCustomerById(@PathVariable Long id) {
         return customerService.getCustomerById(id);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter a number: ");
+        int number = sc.nextInt();
+        System.out.println("enter a name: ");
+        String name = sc.nextLine();
+
+        System.out.println("number = " + number + name);
     }
 }
